@@ -1,9 +1,16 @@
 import pygame
 import random
+import sys
+import os
 from pygame.locals import *
 from time import time
 
 print("Hello")
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
 pygame.init()
 font = pygame.font.Font(None, 36)
@@ -28,10 +35,10 @@ coin_effect_start_time = 0
 teleport_delay = 0.2  
 teleport_start_time = 0
 
-player_up = pygame.image.load("imgs/player/player_UP.png").convert_alpha()
-player_down = pygame.image.load("imgs/player/player_DOWN.png").convert_alpha()
-player_left = pygame.image.load("imgs/player/player_LEFT.png").convert_alpha()
-player_right = pygame.image.load("imgs/player/player_RIGHT.png").convert_alpha()
+player_up = pygame.image.load(resource_path("imgs/player/player_UP.png")).convert_alpha()
+player_down = pygame.image.load(resource_path("imgs/player/player_DOWN.png")).convert_alpha()
+player_left = pygame.image.load(resource_path("imgs/player/player_LEFT.png")).convert_alpha()
+player_right = pygame.image.load(resource_path("imgs/player/player_RIGHT.png")).convert_alpha()
 
 player_rect = player_right.get_rect()
 player_rect.x = 50
@@ -63,7 +70,7 @@ while run:
         screen.fill((0, 0, 0))
 
         # Display the logo
-        logo = pygame.image.load("imgs/logos/logo.png").convert_alpha()
+        logo = pygame.image.load(resource_path("imgs/logos/logo.png")).convert_alpha()
         logo_width = 200
         logo_height = 100
         logo = pygame.transform.scale(logo, (logo_width, logo_height))

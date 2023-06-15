@@ -2,7 +2,7 @@ name: Build and Upload Artifact
 
 on:
   push:
-    branches: [ main ]
+    branches: [ '**' ]
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         pip install pyinstaller pygame
 
     - name: Build application
-      run: pyinstaller main.py
+      run: pyinstaller main.spec
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
