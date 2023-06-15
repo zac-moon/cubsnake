@@ -23,7 +23,7 @@ jobs:
         pip install pyinstaller pygame
 
     - name: Build application
-      run: pyinstaller --onefile --hidden-import=pygame main.py
+      run: pyinstaller main.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
