@@ -47,8 +47,8 @@ player_rect.y = 275
 player_direction = "right"
 
 try:
-    with open("hiscore.txt", "r") as file:
-        highscore = int(file.read())
+    with open(resource_path('hiscore.txt'), 'r') as file:
+        hiscore = int(file.read())
 except FileNotFoundError:
     pass
 
