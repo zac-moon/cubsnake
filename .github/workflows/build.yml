@@ -24,9 +24,6 @@ jobs:
 
     - name: Build application
       run: pyinstaller main.spec
-      
-    - name: Make binary executable
-      run: chmod +x dist/main
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
