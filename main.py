@@ -57,6 +57,10 @@ game_state = "home"
 # Define the movement speed
 movement_speed = 2
 
+# Define the text variables
+points_text = font.render("Points: " + str(points), True, (255, 255, 255))
+highscore_text = font.render("High Score: " + str(highscore), True, (255, 255, 255))
+
 run = True
 while run:
     if game_state == "home":
