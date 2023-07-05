@@ -1,0 +1,1 @@
+pyinstaller --onefile --windowed --add-data "imgs/player/player_UP.png:imgs/player" --add-data "imgs/player/player_DOWN.png:imgs/player" --add-data "imgs/player/player_LEFT.png:imgs/player" --add-data "imgs/player/player_RIGHT.png:imgs/player" --add-data "hiscore.txt:." CubSnake.py
