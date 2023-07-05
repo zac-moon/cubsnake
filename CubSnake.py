@@ -16,7 +16,6 @@ pygame.init()
 font = pygame.font.Font(None, 36)
 
 points = 0
-highscore = 0
 
 screenWIDTH = 800
 screenHEIGHT = 600
@@ -46,20 +45,12 @@ player_rect.y = 275
 
 player_direction = "right"
 
-try:
-    with open("hiscore.txt", "r") as file:
-        highscore = int(file.read())
-except FileNotFoundError:
-    pass
-
 game_state = "home"
 
 # Define the movement speed
 movement_speed = 2
 
-# Define the text variables
 points_text = font.render("Points: " + str(points), True, (255, 255, 255))
-highscore_text = font.render("High Score: " + str(highscore), True, (255, 255, 255))
 
 run = True
 while run:
@@ -73,14 +64,6 @@ while run:
 
         screen.fill((0, 0, 0))
 
-        # Display the logo
-        logo = pygame.image.load(resource_path("imgs/logos/logo.png")).convert_alpha()
-        logo_width = 200
-        logo_height = 100
-        logo = pygame.transform.scale(logo, (logo_width, logo_height))
-        screen.blit(logo, (screenWIDTH // 2 - logo_width // 2, 100))
-
-        # Display the home text
         home_text = font.render("Press SPACE to Start", True, (255, 255, 255))
         screen.blit(home_text, (screenWIDTH // 2 - home_text.get_width() // 2, 300))
 
@@ -116,31 +99,24 @@ while run:
 
         if player_rect.colliderect(coin):
             if time() - teleport_start_time > teleport_delay:
-                # Check if the coin would overlap with the points and highscore texts
+                # Check if the coin would overlap with the points text
                 coin_rect = pygame.Rect(
                     random.randint(0, screenWIDTH - coin_width),
-                    random.randint(0, screenHEIGHT - coin_height),
+random.randint(0, screenHEIGHT - coin_height),
                     coin_width,
                     coin_height,
                 )
                 points_rect = points_text.get_rect(
                     topleft=(screenWIDTH - points_text.get_width() - 10, 10)
                 )
-                highscore_rect = highscore_text.get_rect(
-                    topleft=(screenWIDTH - highscore_text.get_width() - 10, 50)
-                )
-                while coin_rect.colliderect(points_rect) or coin_rect.colliderect(highscore_rect):
+                
+                while coin_rect.colliderect(points_rect):
                     coin_rect.x = random.randint(0, screenWIDTH - coin_width)
                     coin_rect.y = random.randint(0, screenHEIGHT - coin_height)
 
                 coin.x = coin_rect.x
                 coin.y = coin_rect.y
                 points += 1
-
-                if points > highscore:
-                    highscore = points
-                    with open("hiscore.txt", "w") as file:
-                        file.write(str(highscore))
 
                 coin_color = (255, 215, 0)  # Set coin color to gold
                 coin_effect_start_time = time()
@@ -163,10 +139,8 @@ while run:
             screen.blit(player_right, player_rect)
 
         points_text = font.render("Points: " + str(points), True, (255, 255, 255))
-        highscore_text = font.render("High Score: " + str(highscore), True, (255, 255, 255))
 
         screen.blit(points_text, (screenWIDTH - points_text.get_width() - 10, 10))
-        screen.blit(highscore_text, (screenWIDTH - highscore_text.get_width() - 10, 50))
 
         pygame.display.flip()
 
