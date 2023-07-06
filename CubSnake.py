@@ -71,16 +71,16 @@ while run:
 
     elif game_state == "playing":
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
+        if keys[pygame.K_w] or keys[pygame.K_UP]:
             player_rect.y -= movement_speed
             player_direction = "up"
-        elif keys[pygame.K_s]:
+        elif keys[pygame.K_s] or keys[pygame.K_DOWN]:
             player_rect.y += movement_speed
             player_direction = "down"
-        elif keys[pygame.K_a]:
+        elif keys[pygame.K_a]or keys[pygame.K_LEFT]:
             player_rect.x -= movement_speed
             player_direction = "left"
-        elif keys[pygame.K_d]:
+        elif keys[pygame.K_d] or keys[pygame.K_RIGHT]:
             player_rect.x += movement_speed
             player_direction = "right"
 
